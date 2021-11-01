@@ -3,7 +3,7 @@ package com.study;
 public class ByteArrayInputStream implements InputStream {
 
     private int currentIndex;
-    private final byte[] array;
+    private byte[] array;
 
     public ByteArrayInputStream(byte[] array) {
         this.array = array;
