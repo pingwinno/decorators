@@ -3,7 +3,9 @@ package study;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -31,7 +33,7 @@ public class ByteArrayInputStreamTest {
     }
 
     @Test
-    public void should_return_when_callReadWithEmptyArray() {
+    public void should_returnEachElementFromArray_when_callReadWithFiveElementsArray() {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FIVE_ELEMENT_ARRAY);
         assertEquals(65, byteArrayInputStream.read());
         assertEquals(66, byteArrayInputStream.read());
@@ -39,6 +41,15 @@ public class ByteArrayInputStreamTest {
         assertEquals(68, byteArrayInputStream.read());
         assertEquals(69, byteArrayInputStream.read());
         assertEquals(-1, byteArrayInputStream.read());
+    }
+
+    @Test
+    public void should_return_when_callReadWithEmptyArray() throws IOException {
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FIVE_ELEMENT_ARRAY);
+        var actualArray = new byte[5];
+        var actualCount = byteArrayInputStream.read(actualArray);
+        assertArrayEquals(FIVE_ELEMENT_ARRAY, actualArray);
+        assertEquals(FIVE_ELEMENT_ARRAY.length, actualCount);
     }
 
 }
