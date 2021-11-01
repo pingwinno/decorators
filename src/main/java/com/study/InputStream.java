@@ -1,9 +1,11 @@
 package com.study;
 
-public interface InputStream extends AutoCloseable {
-    int read();
+import java.io.IOException;
 
-    int read(byte[] array);
+public interface InputStream extends AutoCloseable {
+    int read() throws IOException;
+
+    int read(byte[] array) throws IOException;
 
     void close();
 }
