@@ -26,7 +26,7 @@ public class ByteArrayOutputStream implements OutputStream {
 
     @Override
     public void write(byte[] array) {
-        if (array.length > bytes.length) {
+        if (array.length > bytes.length - currentIndex) {
             bytes = Arrays.copyOf(bytes, bytes.length + array.length);
         }
         System.arraycopy(array, 0, bytes, currentIndex, array.length);
@@ -46,5 +46,4 @@ public class ByteArrayOutputStream implements OutputStream {
     public byte[] toByteArray() {
         return Arrays.copyOf(bytes, currentIndex);
     }
-
 }
