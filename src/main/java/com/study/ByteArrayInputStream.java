@@ -2,8 +2,8 @@ package com.study;
 
 public class ByteArrayInputStream implements InputStream {
 
+    private final byte[] array;
     private int currentIndex;
-    private byte[] array;
 
     public ByteArrayInputStream(byte[] array) {
         this.array = array;
@@ -18,9 +18,18 @@ public class ByteArrayInputStream implements InputStream {
     }
 
     @Override
-    public int read(byte[] array) {
-        System.arraycopy(this.array, 0, array, 0, array.length);
-        return array.length;
+    public int read(byte[] buffer) {
+        if (currentIndex > array.length - 1) {
+            return -1;
+        }
+        //System.arrayCopy не копирует меньшие массивы в большие
+        for (int i = currentIndex, k = 0; i < array.length && k < buffer.length; i++, k++) {
+            buffer[k] = array[i];
+        }
+        //Да, индекс уходит за длинну внутреннего массива. Именно поэтому вверху такая проверка и да это не очевидный код я знаю.
+        var copiedItemsNumber = array.length - currentIndex;
+        currentIndex += buffer.length;
+        return Math.min(copiedItemsNumber, buffer.length);
     }
 
     @Override
