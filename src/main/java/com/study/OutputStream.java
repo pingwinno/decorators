@@ -1,11 +1,13 @@
 package com.study;
 
-public interface OutputStream {
-    void write(int data);
+import java.io.IOException;
 
-    void write(byte[] array);
+public interface OutputStream extends AutoCloseable {
+    void write(int data) throws IOException;
 
-    void close();
+    void write(byte[] array) throws IOException;
 
-    void flush();
+    void close() throws IOException;
+
+    void flush() throws IOException;
 }

@@ -1,6 +1,6 @@
 package com.study;
 
-public interface InputStream {
+public interface InputStream extends AutoCloseable {
     int read();
 
     int read(byte[] array);
