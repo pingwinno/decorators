@@ -3,9 +3,10 @@ package com.study;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class BufferedOutputStreamTest {
 
@@ -60,5 +61,15 @@ public class BufferedOutputStreamTest {
         bufferedOutputStream.write(ONE_ELEMENT_ARRAY);
         bufferedOutputStream.flush();
         Assertions.assertArrayEquals(ONE_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
+    }
+
+    @Test
+    public void should_flushBufferAndWriteDataDirectlyToStream_when_callReadWithArrayLargerThenBuffer() throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(byteArrayOutputStream);
+        var data = new byte[100];
+        Arrays.fill(data, (byte) 100);
+        bufferedOutputStream.write(data);
+        assertArrayEquals(data, byteArrayOutputStream.toByteArray());
     }
 }
