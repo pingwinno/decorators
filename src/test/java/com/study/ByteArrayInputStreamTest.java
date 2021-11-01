@@ -43,7 +43,7 @@ public class ByteArrayInputStreamTest {
     }
 
     @Test
-    public void should_return_when_callReadWithEmptyArray() throws IOException {
+    public void should_return_when_callReadWithEmptyArray() {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FIVE_ELEMENT_ARRAY);
         var actualArray = new byte[5];
         var actualCount = byteArrayInputStream.read(actualArray);

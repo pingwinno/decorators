@@ -13,14 +13,14 @@ public class ByteArrayOutputStreamTest {
 
 
     @Test
-    void should_returnArrayWithOneByte_when_writeArrayWithOneByteStream() throws IOException {
+    void should_returnArrayWithOneByte_when_writeArrayWithOneByteStream() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byteArrayOutputStream.write(ONE_ELEMENT_ARRAY);
         Assertions.assertArrayEquals(ONE_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
     }
 
     @Test
-    void should_returnArrayWithFiveBytes_when_writeArrayWithFiveBytesStream() throws IOException {
+    void should_returnArrayWithFiveBytes_when_writeArrayWithFiveBytesStream() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byteArrayOutputStream.write(FIVE_BYTES_ELEMENT_ARRAY);
         Assertions.assertArrayEquals(FIVE_BYTES_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
