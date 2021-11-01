@@ -43,12 +43,26 @@ public class ByteArrayInputStreamTest {
     }
 
     @Test
-    public void should_return_when_callReadWithEmptyArray() {
+    public void should_returnNumberOfReadElementsAndFilledArray_when_callReadAndPassEmptyArray() {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FIVE_ELEMENT_ARRAY);
         var actualArray = new byte[5];
         var actualCount = byteArrayInputStream.read(actualArray);
         assertArrayEquals(FIVE_ELEMENT_ARRAY, actualArray);
         assertEquals(FIVE_ELEMENT_ARRAY.length, actualCount);
+        assertEquals(-1, byteArrayInputStream.read(actualArray));
     }
 
+    @Test
+    public void should_returnNumberOfReadElementsAndFilledArray_when_callReadAndPassEmptyArrayBiggerThanStream() {
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FIVE_ELEMENT_ARRAY);
+        var actualArray = new byte[100];
+        var actualCount = byteArrayInputStream.read(actualArray);
+        assertEquals(65, actualArray[0]);
+        assertEquals(66, actualArray[1]);
+        assertEquals(67, actualArray[2]);
+        assertEquals(68, actualArray[3]);
+        assertEquals(69, actualArray[4]);
+        assertEquals(FIVE_ELEMENT_ARRAY.length, actualCount);
+        assertEquals(-1, byteArrayInputStream.read(actualArray));
+    }
 }

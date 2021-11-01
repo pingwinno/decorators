@@ -1,10 +1,10 @@
 package com.study;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 
-import java.io.IOException;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class ByteArrayOutputStreamTest {
 
@@ -16,14 +16,14 @@ public class ByteArrayOutputStreamTest {
     void should_returnArrayWithOneByte_when_writeArrayWithOneByteStream() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byteArrayOutputStream.write(ONE_ELEMENT_ARRAY);
-        Assertions.assertArrayEquals(ONE_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
+        assertArrayEquals(ONE_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
     }
 
     @Test
     void should_returnArrayWithFiveBytes_when_writeArrayWithFiveBytesStream() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byteArrayOutputStream.write(FIVE_BYTES_ELEMENT_ARRAY);
-        Assertions.assertArrayEquals(FIVE_BYTES_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
+        assertArrayEquals(FIVE_BYTES_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
     }
 
     @Test
@@ -34,6 +34,16 @@ public class ByteArrayOutputStreamTest {
         byteArrayOutputStream.write(67);
         byteArrayOutputStream.write(68);
         byteArrayOutputStream.write(69);
-        Assertions.assertArrayEquals(FIVE_BYTES_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
+        assertArrayEquals(FIVE_BYTES_ELEMENT_ARRAY, byteArrayOutputStream.toByteArray());
+    }
+
+
+    @Test
+    public void should_expandInternalArray_when_callReadWithArrayLargerThenBuffer() {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        var data = new byte[100];
+        Arrays.fill(data, (byte) 100);
+        byteArrayOutputStream.write(data);
+        assertArrayEquals(data, byteArrayOutputStream.toByteArray());
     }
 }
